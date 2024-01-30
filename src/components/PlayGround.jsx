@@ -68,8 +68,8 @@ export const WorldScene = () => {
   // \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   const ref = useRef();
   const { physics, perfVisible } = useControls("Settings", {
-    physics: true,
-    perfVisible: true,
+    physics: false,
+    perfVisible: false,
   });
 
   // MODE
