@@ -1,0 +1,247 @@
+.all_btns {
+  // position: absolute;
+  // width: 100vw;
+  // height: 100vh;
+  :where(.css-dev-only-do-not-override-gzal6t).ant-float-btn-primary
+    .ant-float-btn-body
+    .ant-float-btn-content
+    .ant-float-btn-icon {
+    width: 25px;
+  }
+  :where(.css-dev-only-do-not-override-gzal6t).ant-float-btn {
+    cursor: url("../public/textures/cursor.png"), auto;
+  }
+  :where(.css-dev-only-do-not-override-gzal6t).ant-float-btn-primary {
+    background-color: transparent;
+  }
+  :where(.css-dev-only-do-not-override-gzal6t).ant-float-btn-primary
+    .ant-float-btn-body {
+    background-color: #fff;
+  }
+  :where(.css-dev-only-do-not-override-gzal6t).ant-float-btn-primary
+    .ant-float-btn-body:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  :where(.css-dev-only-do-not-override-gzal6t).ant-float-btn-primary
+    .ant-float-btn-body:hover
+    .ant-float-btn-content
+    .ant-float-btn-icon
+    svg {
+    fill: #fff;
+  }
+  :where(.css-dev-only-do-not-override-gzal6t).ant-float-btn-primary
+    .ant-float-btn-body
+    .ant-float-btn-content
+    .ant-float-btn-icon
+    .anticon-close
+    svg {
+    fill: #000;
+  }
+  :where(.css-dev-only-do-not-override-gzal6t).ant-float-btn-primary
+    .ant-float-btn-body:hover
+    .ant-float-btn-content
+    .ant-float-btn-icon
+    .anticon-close
+    svg {
+    fill: #fff;
+  }
+}
+//  loading heart
+.loader-heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  .preloader {
+    animation: rotate 2.3s cubic-bezier(0.75, 0, 0.5, 1) infinite;
+    span {
+      --c: #f23f3f;
+      position: absolute;
+      display: block;
+      height: 64px;
+      width: 64px;
+      background: var(--c);
+      border: 1px solid var(--c);
+      border-radius: 100%;
+    }
+    span:nth-child(1) {
+      transform: translate(-28px, -28px);
+      animation: shape_1 2.3s cubic-bezier(0.75, 0, 0.5, 1) infinite;
+    }
+    span:nth-child(2) {
+      transform: translate(28px, -28px);
+      animation: shape_2 2.3s cubic-bezier(0.75, 0, 0.5, 1) infinite;
+    }
+    span:nth-child(3) {
+      position: relative;
+      border-radius: 0px;
+      transform: scale(0.98) rotate(-45deg);
+      animation: shape_3 2.3s cubic-bezier(0.75, 0, 0.5, 1) infinite;
+    }
+  }
+}
+
+@keyframes rotate {
+  50% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(720deg);
+  }
+}
+@keyframes shape_1 {
+  60% {
+    transform: scale(0.4);
+  }
+}
+@keyframes shape_2 {
+  40% {
+    transform: scale(0.4);
+  }
+}
+@keyframes shape_3 {
+  50% {
+    border-radius: 100%;
+    transform: scale(0.5) rotate(-45deg);
+  }
+
+  100% {
+    transform: scale(0.98) rotate(-45deg);
+  }
+}
+
+.shadow {
+  position: relative;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: block;
+  height: 16px;
+  width: 64px;
+  border-radius: 50%;
+  background-color: #d9d9d9;
+  border: 1px solid #d9d9d9;
+  animation: shadow 2.3s cubic-bezier(0.75, 0, 0.5, 1) infinite;
+}
+
+@keyframes shadow {
+  50% {
+    transform: translateX(-50%) scale(0.5);
+    border-color: #f2f2f2;
+  }
+}
+
+//
+.play-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 10px;
+  color: white;
+  text-shadow: 2px 2px rgb(116, 116, 116);
+  text-transform: uppercase;
+  // cursor: pointer;
+  cursor: url("../public/textures/cursor.png"), auto;
+  border: solid 2px black;
+  letter-spacing: 1px;
+  font-weight: 600;
+  font-size: 17px;
+  background-color: hsl(49deg 98% 60%);
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  &:active {
+    transform: scale(0.9);
+    transition: all 100ms ease;
+  }
+  svg {
+    transition: all 0.5s ease;
+    z-index: 2;
+    width: 50%;
+  }
+  &:hover svg {
+    transform: scale(2) translate(70%) rotateY(180deg);
+  }
+  &:hover .now {
+    font-size: 60px;
+    transform: translateX(30px);
+    transition-delay: 300ms;
+  }
+
+  .play {
+    font-size: 40px;
+    transition: all 0.5s ease;
+    transition-delay: 300ms;
+  }
+
+  .now {
+    position: absolute;
+    left: 0;
+    transform: translateX(-100%);
+    transition: all 0.5s ease;
+    z-index: 2;
+  }
+  &hover .play {
+    transform: translateX(200%);
+    transition-delay: 300ms;
+  }
+}
+.play-btn.clicked {
+  transform: scale(2.5);
+  opacity: 0;
+}
+
+// pikachu
+:where(.css-dev-only-do-not-override-gzal6t).ant-btn-primary {
+  background-color: rgb(124 124 124 / 30%);
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  font-size: 1.3rem;
+  // border: 3px solid #7691e1;
+  border-radius: 20px;
+}
+:where(.css-dev-only-do-not-override-gzal6t).ant-btn-primary:not(:disabled):not(
+    .ant-btn-disabled
+  ):hover,
+:where(.css-dev-only-do-not-override-gzal6t).ant-btn-primary.touch {
+  background-color: rgb(255, 221, 96);
+  color: #3a3a3a;
+  border: 3px solid #e2dd98;
+}
+:where(.css-dev-only-do-not-override-gzal6t).ant-btn {
+  height: auto;
+}
+:where(.css-dev-only-do-not-override-gzal6t).ant-popover .ant-popover-inner {
+  background: rgb(255 255 255 / 75%);
+}
+:where(.css-dev-only-do-not-override-gzal6t).ant-popover
+  .ant-popover-inner-content {
+  font-weight: 600;
+}
+
+.control-img {
+  position: absolute;
+  width: 25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 11%;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  z-index: 10000;
+}
+
+:where(.css-dev-only-do-not-override-gzal6t).ant-popover .ant-popover-title {
+  font-weight: 900;
+}
+:where(.css-dev-only-do-not-override-gzal6t).ant-popover .ant-popover-inner-content{
+  color: #2196F3;
+}

@@ -1,0 +1,45 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+canvas {
+  cursor: url("../public/textures/cursor.png"), auto;
+}
+canvas.night {
+  cursor: url("./assets/search.png"), auto;
+}
+.loading {
+  z-index: 1000000;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  backdrop-filter: blur(10px);
+}
+
+.pikachu,
+.aaa {
+  cursor: pointer !important;
+}
+:where(.css-dev-only-do-not-override-gzal6t).ant-message
+  .ant-message-notice-wrapper
+  .ant-message-notice-content {
+  background-color: transparent;
+  box-shadow: 0 6px 16px 0 rgb(255 255 255 / 47%),
+    0 3px 6px -4px rgba(255, 255, 255, 0.12),
+    0 9px 28px 8px rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-weight: 900;
+  transition: all e;
+}
