@@ -11,19 +11,19 @@ import { useGLTF, useAnimations, useTexture } from "@react-three/drei";
 
 export const Gastly = ({ ...props }) => {
   const group = useRef();
-  const [openLight, setopenLight] = useState(false);
   const { nodes, materials, animations } = useGLTF("/models/gastly.glb");
   const { actions } = useAnimations(animations, group);
   const texture = useTexture("/textures/gastly.png");
   texture.flipY = false;
-
+  
   useEffect(() => {
     actions["winkR"].reset().fadeIn(0.5).play();
     actions["winkL"].reset().fadeIn(0.5).play();
   }, [actions]);
-
+  
   const spotlightRef = useRef();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [openLight, setopenLight] = useState(true);
 
   // 开关探照灯
   // const openLight = true;
@@ -40,7 +40,7 @@ export const Gastly = ({ ...props }) => {
     // 手电筒
     if (openLight) {
       setMousePosition({ x: mouse.x, y: mouse.y });
-      spotlightRef.current.position.x = -mouse.x * 20;
+      spotlightRef.current.position.x = -mouse.x * 22;
       spotlightRef.current.position.y = -mouse.y * 8;
     }
 

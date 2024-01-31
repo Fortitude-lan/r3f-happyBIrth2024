@@ -2,14 +2,22 @@ import React, { useEffect, useState, useRef } from "react";
 import Icon, {
   CommentOutlined,
   CustomerServiceOutlined,
+  SettingOutlined,
 } from "@ant-design/icons";
-import { FloatButton } from "antd";
+import { FloatButton, Popover } from "antd";
 
 import StarSvg from "../assets/star.svg?react";
 import KeyControlImg from "../assets/keyControls.png";
 import OpenMusicSvg from "../assets/open_music.svg?react";
 import CloseMusicSvg from "../assets/close_music.svg?react";
+import IvysaurSvg from "../assets/Ivysaur.svg?react";
+import SquirtleSvg from "../assets/Squirtle.svg?react";
+import CharizardSvg from "../assets/fire.svg?react";
+import SlowpokeSvg from "../assets/Slowpoke.svg?react";
+import PikachuSvg from "../assets/Pikachu.svg?react";
 import Svg from "../assets/15.svg?react";
+import { useGlobalContext } from "../hook/globalContext";
+
 const LoadingButton = ({ onClick, isOpen }) => (
   // <div className="loader-heart" onClick={onClick}>
   //   <div className="preloader">
@@ -40,7 +48,8 @@ export default function OutsideBtns() {
   const clickRef = useRef(new Audio("/sounds/click1.mp3"));
   const bgMp3 = new Audio("/sounds/bg.mp3");
   const pausedTimeRef = useRef(0);
-
+  const { collisionCount, isCollision } = useGlobalContext();
+  console.log("isCollision", isCollision);
   // 初始按钮
   const handleButtonClick = () => {
     setOpen(!open);
@@ -78,6 +87,15 @@ export default function OutsideBtns() {
       {isLoading && <LoadingButton onClick={handleButtonClick} isOpen={open} />}
       {/* BUTTON */}
       <FloatButton
+        icon={<SettingOutlined />}
+        type="primary"
+        style={{
+          right: 24,
+          top: 30,
+        }}
+        // onClick={() => setClose(!close)}
+      />
+      <FloatButton
         icon={close ? <OpenMusicSvg /> : <CloseMusicSvg />}
         type="primary"
         style={{
@@ -93,11 +111,72 @@ export default function OutsideBtns() {
         }}
         // icon={<CustomerServiceOutlined />}
         icon={<StarSvg />}
+        onOpenChange={() => {
+          // console.log("珂珂珂珂");
+        }}
       >
-        <FloatButton />
-        <FloatButton icon={<CommentOutlined />} />
+        {/* <Popover
+          placement="left"
+          title={"Charizard"}
+          content={
+            "A colossal flying creature, mastering the power of fire, guards the continent."
+          }
+        >
+          <FloatButton
+            type="primary"
+            icon={<CharizardSvg />}
+            // badge={{
+            //   count: Number(collisionCount),
+            // }}
+          />
+        </Popover> */}
+        <Popover
+          placement="left"
+          title={'Pikachu'}
+          className={`${isCollision.pikachu ? "done pikachu" : ""}`}
+          content={
+            "A creature wielding the power of lightning holds a crucial task in its grasp."
+          }
+        >
+          <FloatButton type="primary" icon={<PikachuSvg />} />
+        </Popover>
+        <Popover
+          placement="left"
+          title={"SlowPoke"}
+          content={
+            "A magical creature, innocent and pure, radiating the healing power, fills the surroundings with warmth and tranquility."
+          }
+          className={`${isCollision.slowpoke ? "done slowpoke" : ""}`}
+        >
+          <FloatButton type="primary" icon={<SlowpokeSvg />} />
+        </Popover>
+        <Popover
+          placement="left"
+          title={"Ivysaur"}
+          content={
+            "In the gentle breeze of dawn, you will discover a magical creature hidden amidst the blossoming foliage."
+          }
+          className={`${isCollision.ivysaur ? "done ivysaur" : ""}`}
+        >
+          <FloatButton
+            type="primary"
+            icon={<IvysaurSvg />}
+            // badge={{
+            //   count: Number(collisionCount),
+            // }}
+          />
+        </Popover>
+        <Popover
+          placement="left"
+          title={"Squirtle"}
+          className={`${isCollision.squirtl ? "done squirtl" : ""}`}
+          content={
+            "Beneath the flowing stream of a small bridge hides a magical creature wielding the power of water."
+          }
+        >
+          <FloatButton type="primary" icon={<SquirtleSvg />} />
+        </Popover>
       </FloatButton.Group>
-
       {/*  ILLUSTRATE   */}
       <img src={KeyControlImg} alt="" className="control-img" />
     </div>

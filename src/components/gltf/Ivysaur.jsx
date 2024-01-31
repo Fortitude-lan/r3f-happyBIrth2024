@@ -4,11 +4,23 @@ Command: npx gltfjsx@6.2.15 .\public\models\Ivysaur.glb -k
 */
 
 import React, { useEffect, useRef, useState } from "react";
-import { useGLTF, useAnimations } from "@react-three/drei";
+import { useGLTF, useAnimations, Html } from "@react-three/drei";
+import {
+  CuboidCollider,
+  CylinderCollider,
+  RigidBody,
+  InstancedRigidBodies,
+  CapsuleCollider,
+} from "@react-three/rapier";
+import { Button, Popover } from "antd";
+import { useGlobalContext } from "../../hook/globalContext";
 
 export function Ivysaur(props) {
+  const { handleIsCollision } = useGlobalContext();
   const group = useRef();
   const { nodes, scene, materials } = useGLTF("/models/Ivysaur.glb");
+  const [isTouch, setisTouch] = useState(false);
+  const audioRef = useRef(new Audio("/sounds/Ivysaur.wav"));
   // 设置自发光材质
   const emissionMaterial = (ref) => {
     ref.current.traverse((child) => {
@@ -27,13 +39,66 @@ export function Ivysaur(props) {
 
   useEffect(() => {
     // 遍历模型中的每个材质并设置自发光
-    emissionMaterial(group);
+    if (group.current) emissionMaterial(group);
   }, []);
   return (
     <group ref={group} {...props}>
-      <primitive object={scene} />
+      <RigidBody
+        name="妙蛙种子"
+        colliders={false}
+        type="fixed"
+        onCollisionEnter={({ manifold, target, other }) => {
+          console.log(
+            "Collision at world position ",
+            manifold.solverContactPoint(0)
+          );
+
+          if (
+            other.rigidBodyObject &&
+            other.rigidBodyObject.name === "character"
+          ) {
+            console.log(
+              target.rigidBodyObject.name,
+              " collided with ",
+              other.rigidBodyObject.name
+            );
+            audioRef.current.play();
+            setisTouch(true);
+            handleIsCollision("ivysaur");
+          }
+        }}
+        onCollisionExit={() => {
+          console.log("离开了妙蛙种子");
+          audioRef.current.pause();
+          setisTouch(false);
+        }}
+      >
+        <primitive object={scene} />
+        <CapsuleCollider args={[0.08, 0.08]} />
+        <Html
+          position={[0, 0.3, 0]}
+          wrapperClass="label"
+          center
+          distanceFactor={6}
+          occlude={[group]}
+        >
+          <Popover
+            trigger="hover"
+            open={isTouch}
+            content={
+              <div>
+                <p>哎呀！MYK,被你找到啦！</p>
+                <p>祝你生日快乐o(*￣▽￣*)ブ</p>
+              </div>
+            }
+            title="Ivysaur :"
+          >
+            <Button type={`primary ${isTouch && "touch"}`}>Hi! MYk</Button>
+          </Popover>
+        </Html>
+      </RigidBody>
       {/* <primitive object={nodes.pm0002_00} />
-      <skinnedMesh
+        <skinnedMesh
         frustumCulled={false}
         name="Ivysaur_1"
         geometry={nodes.Ivysaur_1.geometry}

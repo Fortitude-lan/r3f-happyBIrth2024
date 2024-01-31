@@ -16,13 +16,6 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import { extend, useFrame, useLoader } from "@react-three/fiber";
-import {
-  BallCollider,
-  CuboidCollider,
-  CylinderCollider,
-  RigidBody,
-  InstancedRigidBodies,
-} from "@react-three/rapier";
 export function Charizard({ hovered, ...props }) {
   const { nodes, scene, materials, animations } = useGLTF(
     "/models/Charizard_anims.glb"

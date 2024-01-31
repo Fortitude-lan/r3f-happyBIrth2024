@@ -28,7 +28,7 @@ import { Pikachu } from "./gltf/Pikachu";
 import SwitchModel from "./gltf/SwitchModel";
 import { Gastly } from "./gltf/Gastly";
 import { FogM } from "./FogM";
-import { FadingImage } from "./FadingIMage";
+import { FadingImage } from "./FadingImage";
 // import Fog from "./Fog";
 export const Experience = () => {
   const [messageApi, contextHolder] = message.useMessage();

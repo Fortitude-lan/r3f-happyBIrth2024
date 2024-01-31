@@ -12,9 +12,10 @@ import { Chochlate } from "./gltf/Chocolate";
 import { Foods } from "./gltf/Foods";
 export default function RigidObjects() {
   const texture1 = useTexture("/textures/pikaBall.png");
+  const texture2 = useTexture("/textures/pm0100_00_Body1.png");
   const cubesCount = 30;
   const cubesRef = useRef();
-  const sphereRef = useRef();
+  const ballRef = useRef();
   const instances = useMemo(() => {
     const instances = [];
     for (let i = 0; i < cubesCount; i++) {
@@ -45,20 +46,6 @@ export default function RigidObjects() {
   };
   return (
     <>
-      {/* Rigid body boxes */}
-      {/* <RigidBody position={[15, 1, 2]}>
-        <mesh receiveShadow castShadow>
-          <boxGeometry args={[0.5, 0.5, 0.5]} />
-          <meshStandardMaterial color={"lightsteelblue"} />
-        </mesh>
-      </RigidBody>
-      <RigidBody position={[15.1, 0, 2]}>
-        <mesh receiveShadow castShadow>
-          <boxGeometry args={[0.5, 0.5, 0.5]} />
-          <meshStandardMaterial color={"lightsteelblue"} />
-        </mesh>
-      </RigidBody> */}
-      {/* <Float speed={2} rotationIntensity={0.5} floatIntensity={0.1}> */}
       <Text3D
         scale={10}
         color="salmon"
@@ -74,37 +61,17 @@ export default function RigidObjects() {
         Happy Birthday
         <meshStandardMaterial color="salmon" />
       </Text3D>
-      {/* </Float> */}
-      {/* <RigidBody position={[20, 5, 0]} colliders={false}>
-        <Text3D
-          size={0.5}
-          height={0.2}
-          position={[-1, 1, 3]}
-          letterSpacing={0.1}
-          font="/typefaces/optimer_bold.typeface.json"
+      {/* 球 */}
+      <RigidBody mass={100} ref={ballRef} colliders="ball">
+        <mesh
+          castShadow
+          position={[-2, 2, 0]}
+          onClick={() => cubeJump(ballRef)}
         >
-          Text 3D
-          <meshStandardMaterial color="aqua" />
-        </Text3D>
-        <Text
-          scale={0.5}
-          color="black"
-          maxWidth={10}
-          textAlign="center"
-          position={[0, 1, 0]}
-          rotation={[0, -Math.PI / 2, 0]}
-        >
-          SDSDS
-        </Text>
-      </RigidBody> */}
-      {/* <RigidBody ref={sphereRef} position={[2, 5, 0]} colliders={false}>
-        <BallCollider args={[0.3]} />
-        <mesh receiveShadow castShadow onClick={() => cubeJump(sphereRef)}>
-          <sphereGeometry args={[0.3, 16, 32]} />
-          <meshStandardMaterial color={"lightsteelblue"} map={texture1} />
+          <sphereGeometry args={[0.4]} />
+          <meshStandardMaterial color="#fff" map={texture2} roughness={0.5} metalness={0.5} />
         </mesh>
-      </RigidBody> */}
-
+      </RigidBody>
       <InstancedRigidBodies instances={instances} colliders="ball" mass={0.001}>
         <instancedMesh
           receiveShadow

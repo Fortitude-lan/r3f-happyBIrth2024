@@ -31,10 +31,10 @@ export default function Moltres(props) {
   }, []);
   useEffect(() => {
     // 在组件加载后，每隔5秒执行一次playAudio函数
-    const intervalId = setInterval(playAudio, 10000);
+    // const intervalId = setInterval(playAudio, 10000);
     console.log("声音");
     // 组件卸载时清除定时器
-    return () => clearInterval(intervalId);
+    // return () => clearInterval(intervalId);
   }, []);
   // 设置自发光材质
   const emissionMaterial = (ref) => {
@@ -77,7 +77,6 @@ export default function Moltres(props) {
   // group.current.rotation.set(0, angle, 0);
   // });
 
-  
   // useFrame((state, delta) => {
   //   if (cRef.current) {
   //     //层火焰闪烁

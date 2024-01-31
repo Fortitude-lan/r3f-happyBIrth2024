@@ -7,14 +7,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useGLTF, useAnimations, Html } from "@react-three/drei";
 import { Button, Popover } from "antd";
-import {
-  CuboidCollider,
-  CylinderCollider,
-  RigidBody,
-  InstancedRigidBodies,
-  CapsuleCollider,
-} from "@react-three/rapier";
+import { RigidBody, CapsuleCollider } from "@react-three/rapier";
+import { useGlobalContext } from "../../hook/globalContext";
+
 export function Squirtle(props) {
+  const { handleIsCollision } = useGlobalContext();
   const { nodes, materials } = useGLTF("/models/Squirtle.glb");
   const group = useRef();
   const [isTouch, setisTouch] = useState(false);
@@ -29,7 +26,7 @@ export function Squirtle(props) {
           const m = child.material;
           m.emissive = m.color;
           m.emissiveMap = m.map;
-          m.emissiveIntensity = 0.35;
+          m.emissiveIntensity = 0.25;
         }
       }
     });
@@ -59,8 +56,9 @@ export function Squirtle(props) {
               " collided with ",
               other.rigidBodyObject.name
             );
-            audioRef.current.play();
             setisTouch(true);
+            handleIsCollision("squirtl");
+            audioRef.current.play();
           }
         }}
         onCollisionExit={() => {

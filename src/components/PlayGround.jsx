@@ -152,8 +152,8 @@ export const WorldScene = () => {
         <Forests mode={pointMode} />
         <Roles />
         <RigidObjects />
-        <Grass position={[0, 0, 40]} scale={[1.45, 0.3, 0.6]} />
         {/* <Grass position={[45, 0, 45]} scale={0.4} /> */}
+        <Grass position={[0, 0, 40]} scale={[1.45, 0.3, 0.6]} />
         <Boundary />
       </Physics>
       {/* 实际控制视角 end /////////////////////////////////////////////////////////// */}

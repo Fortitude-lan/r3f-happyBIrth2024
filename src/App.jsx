@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
 import Loading from "./components/Loading";
 import PlayGround from "./components/PlayGround";
+import { GlobalProvider } from "./hook/globalContext";
 
 function App() {
   return (
@@ -24,7 +25,14 @@ function App() {
             </>
           }
         />
-        <Route path="/playground" element={<PlayGround />} />
+        <Route
+          path="/playground"
+          element={
+            <GlobalProvider>
+              <PlayGround />
+            </GlobalProvider>
+          }
+        />
       </Routes>
     </Router>
   );

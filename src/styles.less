@@ -34,6 +34,11 @@
     .ant-float-btn-body
     .ant-float-btn-content
     .ant-float-btn-icon
+    svg,
+  :where(.css-dev-only-do-not-override-gzal6t).ant-float-btn-primary
+    .ant-float-btn-body
+    .ant-float-btn-content
+    .ant-float-btn-icon
     .anticon-close
     svg {
     fill: #000;
@@ -197,7 +202,33 @@
   opacity: 0;
 }
 
-// pikachu
+// Model less
+
+.all_btns
+  :where(.css-dev-only-do-not-override-gzal6t).ant-float-btn.done
+  .ant-float-btn-body {
+  background-color: #a4e9cc;
+}
+.all_btns
+  :where(.css-dev-only-do-not-override-gzal6t).ant-float-btn.done.slowpoke
+  .ant-float-btn-body {
+  background-color: #edb3cc;
+}
+.all_btns
+  :where(.css-dev-only-do-not-override-gzal6t).ant-float-btn.done.squirtl
+  .ant-float-btn-body {
+  background-color: #a4d7e9;
+}
+.all_btns
+  :where(.css-dev-only-do-not-override-gzal6t).ant-float-btn.done.pikachu
+  .ant-float-btn-body {
+  background-color: #ffe660;
+}
+.all_btns
+  :where(.css-dev-only-do-not-override-gzal6t).ant-float-btn.done.ivysaur
+  .ant-float-btn-body {
+  background-color:  #69d075
+}
 :where(.css-dev-only-do-not-override-gzal6t).ant-btn-primary {
   background-color: rgb(124 124 124 / 30%);
   font-weight: 600;
@@ -211,14 +242,36 @@
   ):hover,
 :where(.css-dev-only-do-not-override-gzal6t).ant-btn-primary.touch {
   background-color: rgb(255, 221, 96);
-  color: #3a3a3a;
+  color: #414141;
   border: 3px solid #e2dd98;
 }
 :where(.css-dev-only-do-not-override-gzal6t).ant-btn {
   height: auto;
 }
+
+:where(
+    .css-dev-only-do-not-override-gzal6t
+  ).ant-popover.ant-popover-placement-left
+  .ant-popover-content {
+  font-family: math;
+  margin: 0 10px;
+  width: 250px;
+  .ant-popover-title {
+    font-size: 20px;
+    margin-bottom: 0;
+  }
+  .ant-popover-inner-content {
+    color: #aaa;
+    font-weight: normal;
+    line-height: 1;
+  }
+  .ant-popover-inner {
+    background: rgb(255 255 255 / 80%) !important;
+  }
+}
+
 :where(.css-dev-only-do-not-override-gzal6t).ant-popover .ant-popover-inner {
-  background: rgb(255 255 255 / 75%);
+  background: rgb(255 255 255 / 75%) !important;
 }
 :where(.css-dev-only-do-not-override-gzal6t).ant-popover
   .ant-popover-inner-content {
@@ -242,6 +295,7 @@
 :where(.css-dev-only-do-not-override-gzal6t).ant-popover .ant-popover-title {
   font-weight: 900;
 }
-:where(.css-dev-only-do-not-override-gzal6t).ant-popover .ant-popover-inner-content{
-  color: #2196F3;
+:where(.css-dev-only-do-not-override-gzal6t).ant-popover
+  .ant-popover-inner-content {
+  color: #2196f3;
 }

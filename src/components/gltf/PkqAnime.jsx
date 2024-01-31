@@ -8,16 +8,18 @@ import { useGLTF, useAnimations, Html } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Button, Popover } from "antd";
 import { RigidBody, CapsuleCollider } from "@react-three/rapier";
+import { useGlobalContext } from "../../hook/globalContext";
+
 export function PkcAnime(props) {
+  const { handleIsCollision } = useGlobalContext();
   const group = useRef();
   const [isTouch, setisTouch] = useState(false);
   const { nodes, scene, materials, animations } = useGLTF(
     "/models/pkqAnime.glb"
   );
   const { actions } = useAnimations(animations, group);
-  const pikaMP3 = new Audio("/sounds/pikachu.mp3");
-
-  // 设置自发光材质
+  const pikaMP3Ref = useRef(new Audio("/sounds/pikachu.mp3"));
+  // 设置自发光材质S
   const emissionMaterial = (ref) => {
     ref.current.traverse((child) => {
       if (child.isMesh && child.material) {
@@ -27,14 +29,14 @@ export function PkcAnime(props) {
           const m = child.material;
           m.emissive = m.color;
           m.emissiveMap = m.map;
-          m.emissiveIntensity = 0.25;
+          m.emissiveIntensity = 0.35;
         }
       }
     });
   };
   useEffect(() => {
     // 遍历模型中的每个材质并设置自发光
-    emissionMaterial(group);
+    if (group.current) emissionMaterial(group);
   }, []);
   useEffect(() => {
     let action = actions["happy"];
@@ -56,9 +58,6 @@ export function PkcAnime(props) {
         ref={group}
         {...props}
         dispose={null}
-        position={[40, 0, 40]}
-        scale={1.5}
-        rotation={[0, -Math.PI / 1.2, 0]}
       >
         <group name="Scene">
           <group name="Pikachu">
@@ -82,11 +81,14 @@ export function PkcAnime(props) {
                     other.rigidBodyObject.name
                   );
                   setisTouch(true);
+                  handleIsCollision("pikachu");
+                  pikaMP3Ref.current.play();
                 }
               }}
               onCollisionExit={() => {
                 console.log("皮卡丘离开了");
                 setisTouch(false);
+                pikaMP3Ref.current.pause();
               }}
             >
               <primitive object={nodes.pm0025_00_pikachu} />
@@ -130,7 +132,10 @@ export function PkcAnime(props) {
                 </Popover>
               </Html>
             </RigidBody>
-            <group name="PikachuF001" onClick={(e) => pikaMP3.play()}>
+            <group
+              name="PikachuF001"
+              onClick={(e) => pikaMP3Ref.current.play()}
+            >
               <skinnedMesh
                 name="PikachuF002"
                 geometry={nodes.PikachuF002.geometry}
