@@ -72,7 +72,7 @@ export default function SwitchModel({
     <>
       <group
         ref={switchRef}
-        position={[-3.2, 1.5, 0]}
+        position={[-2.8, 1.5, 0]}
         scale={0.08}
         dispose={null}
         rotation={[Math.PI / 2, Math.PI / 2, 0]}

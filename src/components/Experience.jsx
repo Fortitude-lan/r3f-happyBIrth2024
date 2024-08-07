@@ -1,4 +1,11 @@
-import { Suspense, useEffect, useRef, useState, forwardRef } from "react";
+import {
+  Suspense,
+  useEffect,
+  useRef,
+  useState,
+  useLayoutEffect,
+  forwardRef,
+} from "react";
 import { useControls } from "leva";
 import * as THREE from "three";
 import {
@@ -136,11 +143,10 @@ export const Experience = () => {
           m2={m2}
         />
         {/* 水波显示图片 */}
-
         {toggle && (
           <FadingImage
             scale={0.3}
-            position={[0, 0, 0]}
+            position={[2.9, -1.4, 0]}
             onClick={() => {
               const switchMP3 = new Audio("/sounds/click.mp3");
               switchMP3.play();
@@ -165,7 +171,7 @@ export const Experience = () => {
 export const HomeTitle = ({ toggle, ...props }) => {
   const textRef = useRef();
   const { tsize, height, letterSpacing } = useControls({
-    tsize: { value: 0.7, min: 0, max: 1, step: 0.01 },
+    tsize: { value: 0.6, min: 0, max: 1, step: 0.01 },
     height: { value: 0.03, min: 0, max: 1, step: 0.01 },
     letterSpacing: { value: 0.0, min: -0.1, max: 0.2, step: 0.01 },
   });
@@ -179,17 +185,17 @@ export const HomeTitle = ({ toggle, ...props }) => {
   //   textRef.current.size = ratio;
   //   sets(ratio)
   // });
-
+  
   return (
     <mesh>
       <Center>
         <Text3D
           ref={textRef}
           height={height}
-          letterSpacing={-0.01}
+          letterSpacing={0.02}
           // size={s}
-          size={0.73}
-          position={[-0.075, 0, 0]}
+          size={0.65}
+          position={[0.35, 0, 0]}
           font="/typefaces/Rubik Bubbles_Regular.json"
         >
           {toggle ? `Welc   me to\nPokémo Land` : `Welcome to\nPokémo   and`}
@@ -200,7 +206,9 @@ export const HomeTitle = ({ toggle, ...props }) => {
           height={height}
           letterSpacing={letterSpacing}
           // size={s}
-          size={tsize}
+          // size={tsize}
+          size={0.65}
+          position={[0.45, 0, 0]}
           font="/typefaces/Rubik Bubbles_Regular.json"
         >
           {toggle ? `Welc   me to\nPokémo Land` : `Welcome to\nPokémo   and`}

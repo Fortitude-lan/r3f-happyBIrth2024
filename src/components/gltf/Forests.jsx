@@ -21,7 +21,7 @@ export function Forests(props) {
   const group = useRef();
   const bowlRef = useRef();
   const [isTouch, setisTouch] = useState(false);
-  const { nodes, materials, animations } = useGLTF("/models/forests1.glb");
+  const { nodes, materials, animations } = useGLTF("/models/forests2.glb");
   const { actions } = useAnimations(animations, group);
   const texture = useTexture("/textures/forest_color_texture.png");
 

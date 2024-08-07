@@ -23,7 +23,7 @@ export function Pikachu({ ...props }) {
     pikachuRef.current.rotation.y = rotationY;
   });
   return (
-    <mesh ref={pikachuRef} scale={0.9} position={[1.15, -1, 0]}>
+    <mesh ref={pikachuRef} scale={0.9} position={[1.05, -0.85, 0]}>
       {/*模型刚体： 模型边缘识别有问题 所以加一个刚体 */}
       <mesh
         scale={[0.5, 0.8, 0.7]}

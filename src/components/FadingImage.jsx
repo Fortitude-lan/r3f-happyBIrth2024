@@ -71,7 +71,6 @@ export const FadingImage = ({ ...props }) => {
         }
         setHover(false);
       }}
-      position={[3.1, -1.4, 0]}
     >
       <circleGeometry args={[0.7]} />
       <imageFadeMaterial
