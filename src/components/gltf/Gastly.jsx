@@ -40,7 +40,7 @@ export const Gastly = ({ ...props }) => {
     // 手电筒
     if (openLight) {
       setMousePosition({ x: mouse.x, y: mouse.y });
-      spotlightRef.current.position.x = -mouse.x * 22;
+      spotlightRef.current.position.x = -mouse.x * 12;
       spotlightRef.current.position.y = -mouse.y * 8;
     }
 

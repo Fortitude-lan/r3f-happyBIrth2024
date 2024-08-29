@@ -68,12 +68,21 @@ export default function SwitchModel({
     // switchRef.current.position.y = camera.position.z * 0.3;
   });
 
+  const { viewport } = useThree(); // 获取视口信息
+  useEffect(() => {
+    const { width, height } = viewport;
+    // 设定模型在视口边缘的位置，这里以左下角为例
+    if (switchRef.current) {
+      switchRef.current.position.set(-width / 2+1, height / 2-1,0);
+    }
+  }, [viewport]);
   return (
     <>
       <group
         ref={switchRef}
-        position={[-2.8, 1.5, 0]}
-        scale={0.08}
+        // position={[-2.8, 1.5, 0]}
+        scale={0.15}
+        position={[0, 0, 0]}
         dispose={null}
         rotation={[Math.PI / 2, Math.PI / 2, 0]}
       >

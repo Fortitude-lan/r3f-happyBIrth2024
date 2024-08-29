@@ -3,18 +3,18 @@
  * @version: Antares
  * @Author: 
  * @Date: 2023-12-23 11:33:52
- * @LastEditors: Antares
- * @LastEditTime: 2024-07-03 19:39:32
+ * @LastEditors: Hesin
+ * @LastEditTime: 2024-08-29 23:08:26
  */
 import React, { Suspense, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Experience } from "./components/Experience";
 import { Leva } from "leva";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
-import Loading from "./components/Loading";
+import HomePage from "./components/HomePage";
 import PlayGround from "./components/PlayGround";
 import { GlobalProvider } from "./hook/globalContext";
+import LoadingScreen from "./LoadingScreen";
 
 function App() {
   const [canvasSize, setCanvasSize] = useState({ width: 800, height: 600 });
@@ -44,11 +44,19 @@ function App() {
           path="/"
           element={
             <>
+              {/* 1.加载 */}
+              <LoadingScreen />
+              {/* 2.控制板 */}
               <Leva collapsed />
-
-              <Canvas shadows camera={{ position: [0, 0, 5], fov: 40 }}>
-                <Suspense fallback={<Loading />}>
-                  <Experience />
+              {/* 3.Canvas */}
+              <Canvas
+                shadows
+                camera={{ position: [0, 0, 8], fov: 40, near: 0.1, far: 1000 }}
+                gl={{ antialias: true }}
+                dpr={[1, 1.5]}
+              >
+                <Suspense fallback={null}>
+                  <HomePage />
                 </Suspense>
               </Canvas>
             </>

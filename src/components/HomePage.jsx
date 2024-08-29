@@ -37,7 +37,9 @@ import { Gastly } from "./gltf/Gastly";
 import { FogM } from "./FogM";
 import { FadingImage } from "./FadingImage";
 // import Fog from "./Fog";
-export const Experience = () => {
+
+export default function HomePage() {
+
   const [messageApi, contextHolder] = message.useMessage();
   const [messageApi1, contextHolder1] = message.useMessage();
   const navigate = useNavigate();
@@ -103,7 +105,9 @@ export const Experience = () => {
 
   return (
     <>
-      <ambientLight intensity={0} color="#fff" />
+      {/* <ambientLight intensity={1} color="#fff" /> */}
+
+      {/* 模型依赖环境光 */}
       {!toggle ? (
         <Environment preset={null} files={"/textures/venice_sunset_1k.hdr"} />
       ) : null}
@@ -119,20 +123,26 @@ export const Experience = () => {
         dampingFactor={0.25} // 可根据需要调整阻尼因子
       />
 
-      {/* 背景 */}
-      <PanoramaSphere />
       <Suspense fallback={null}>
+
+        {/* 背景 */}
+        <PanoramaSphere />
+
         {/* 皮卡丘 */}
-        {!toggle && <Pikachu />}
+        {!toggle && <Pikachu scale={1.2} position={[1.27, -1.05, 0]} />}
         {/* 鬼 */}
+        {toggle && <Gastly position={[-0.8, 0.7, 0]} scale={1.1} />}
         {/* <Suspense fallback={null}>
           <Gastly position={[-0.64, 0.7, 0]} scale={1.1} />
           <FogM position={[-0.3, 0.35, 0]} />
         </Suspense> */}
-        {toggle && <Gastly position={[-0.64, 0.7, 0]} scale={1.1} />}
 
         {/* 文字 */}
         <HomeTitle toggle={toggle} />
+        {/* <Html fullscreen wrapperClass='home-page-tt'>
+          <div className='home-tt'>Welcome to <br />Pokémo   and</div>
+        </Html> */}
+
         {/* Switch 开关*/}
         <SwitchModel
           x={x}
@@ -161,10 +171,12 @@ export const Experience = () => {
         {/* <DreamGate /> */}
         {/* {toggle && <Box position={[0, 0, 0]} scale={0.15} toggle={toggle}/>} */}
 
+
+
         {/* message */}
         <Html>{contextHolder}</Html>
         <Html>{contextHolder1}</Html>
-      </Suspense>
+      </Suspense >
     </>
   );
 };
@@ -172,8 +184,8 @@ export const HomeTitle = ({ toggle, ...props }) => {
   const textRef = useRef();
   const { tsize, height, letterSpacing } = useControls({
     tsize: { value: 0.6, min: 0, max: 1, step: 0.01 },
-    height: { value: 0.03, min: 0, max: 1, step: 0.01 },
-    letterSpacing: { value: 0.0, min: -0.1, max: 0.2, step: 0.01 },
+    height: { value: 0.025, min: 0, max: 1, step: 0.01 },
+    letterSpacing: { value: 0.03, min: -0.1, max: 0.2, step: 0.01 },
   });
   // 在这里设置初始比率： 浏览器宽度- texted size
   // let initialSize = 0.31;
@@ -185,7 +197,7 @@ export const HomeTitle = ({ toggle, ...props }) => {
   //   textRef.current.size = ratio;
   //   sets(ratio)
   // });
-  
+
   return (
     <mesh>
       <Center>
@@ -194,8 +206,9 @@ export const HomeTitle = ({ toggle, ...props }) => {
           height={height}
           letterSpacing={0.02}
           // size={s}
-          size={0.65}
-          position={[0.35, 0, 0]}
+          size={0.8}
+          // size={fontsize}
+          position={[0, -0.5, 0]}
           font="/typefaces/Rubik Bubbles_Regular.json"
         >
           {toggle ? `Welc   me to\nPokémo Land` : `Welcome to\nPokémo   and`}
@@ -207,8 +220,8 @@ export const HomeTitle = ({ toggle, ...props }) => {
           letterSpacing={letterSpacing}
           // size={s}
           // size={tsize}
-          size={0.65}
-          position={[0.45, 0, 0]}
+          size={0.75}
+          position={[0.2, -0.5, 0]}
           font="/typefaces/Rubik Bubbles_Regular.json"
         >
           {toggle ? `Welc   me to\nPokémo Land` : `Welcome to\nPokémo   and`}
@@ -218,21 +231,23 @@ export const HomeTitle = ({ toggle, ...props }) => {
     </mesh>
   );
 };
-export const PanoramaSphere = ({ ...props }) => {
+
+// 全景背景 sphere 贴图
+export const PanoramaSphere = () => {
   const bgMap = useTexture("/textures/home_bg.png");
-  const sphereRef = useRef();
+  const bgRef = useRef();
   // 每帧旋转球体
   useFrame(() => {
-    if (sphereRef.current) {
-      sphereRef.current.rotation.y += 0.001;
+    if (bgRef.current) {
+      bgRef.current.rotation.y += 0.001;
     }
   });
 
   return (
-    <mesh ref={sphereRef}>
-      <sphereGeometry args={[5, 64, 64]} />
+    <mesh ref={bgRef}>
+      <sphereGeometry args={[10, 32, 32]} />
       <meshStandardMaterial side={THREE.BackSide} map={bgMap} />
     </mesh>
   );
 };
-export default Experience;
+;

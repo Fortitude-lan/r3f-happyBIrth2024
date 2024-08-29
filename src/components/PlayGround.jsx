@@ -38,8 +38,11 @@ import OutsideBtns from "./OutsideBtns";
 export default function PlayGround() {
   return (
     <>
+      {/* 1.加载 */}
+      {/* <Loading /> */}
+      {/* 2.控制板 */}
       <Leva collapsed />
-      <OutsideBtns />
+      {/* 3.Canvas */}
       <Canvas
         shadows
         camera={{
@@ -47,16 +50,19 @@ export default function PlayGround() {
           near: 0.1,
           far: 1000,
         }}
-        // onPointerDown={(e) => {
-        //   if (e.pointerType === "mouse") {
-        //     e.target.requestPointerLock();
-        //   }
-        // }}
+      // onPointerDown={(e) => {
+      //   if (e.pointerType === "mouse") {
+      //     e.target.requestPointerLock();
+      //   }
+      // }}
       >
         <Suspense fallback={<Loading />}>
           <WorldScene />
         </Suspense>
       </Canvas>
+
+      {/* BTNs */}
+      <OutsideBtns />
     </>
   );
 }
@@ -69,7 +75,7 @@ export const WorldScene = () => {
   const ref = useRef();
   const { physics, perfVisible } = useControls("Settings", {
     physics: false,
-    perfVisible: false,
+    perfVisible: true,
   });
 
   // MODE
@@ -118,7 +124,7 @@ export const WorldScene = () => {
       />
       <ambientLight intensity={0.2} />
       <hemisphereLight skyColor="blue" groundColor="#000" intensity={0.1} />
-      <Sky />
+      {/* <Sky /> */}
       {/* <fog attach="fog" args={["#dbecfb", 5, 30]} /> */}
       {/* 实际控制视角 /////////////////////////////////////////////////////////// */}
       <Physics
@@ -153,7 +159,7 @@ export const WorldScene = () => {
         <Roles />
         <RigidObjects />
         {/* <Grass position={[45, 0, 45]} scale={0.4} /> */}
-        <Grass position={[0, 0, 40]} scale={[1.45, 0.3, 0.6]} />
+        {/* <Grass position={[0, 0, 40]} scale={[1.45, 0.3, 0.6]} /> */}
         <Boundary />
       </Physics>
       {/* 实际控制视角 end /////////////////////////////////////////////////////////// */}
