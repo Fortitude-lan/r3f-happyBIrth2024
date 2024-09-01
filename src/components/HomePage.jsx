@@ -139,9 +139,7 @@ export default function HomePage() {
 
         {/* 文字 */}
         <HomeTitle toggle={toggle} />
-        {/* <Html fullscreen wrapperClass='home-page-tt'>
-          <div className='home-tt'>Welcome to <br />Pokémo   and</div>
-        </Html> */}
+
 
         {/* Switch 开关*/}
         <SwitchModel
@@ -152,11 +150,11 @@ export default function HomePage() {
           m1={m1}
           m2={m2}
         />
-        {/* 水波显示图片 */}
+        {/* 入口 水波显示图片 */}
         {toggle && (
           <FadingImage
-            scale={0.3}
-            position={[2.9, -1.4, 0]}
+            scale={0.5}
+            // position={[3.5, -1.5, 0]}
             onClick={() => {
               const switchMP3 = new Audio("/sounds/click.mp3");
               switchMP3.play();

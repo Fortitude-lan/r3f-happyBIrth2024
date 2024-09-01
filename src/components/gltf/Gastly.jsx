@@ -15,12 +15,12 @@ export const Gastly = ({ ...props }) => {
   const { actions } = useAnimations(animations, group);
   const texture = useTexture("/textures/gastly.png");
   texture.flipY = false;
-  
+
   useEffect(() => {
     actions["winkR"].reset().fadeIn(0.5).play();
     actions["winkL"].reset().fadeIn(0.5).play();
   }, [actions]);
-  
+
   const spotlightRef = useRef();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [openLight, setopenLight] = useState(true);
@@ -40,21 +40,21 @@ export const Gastly = ({ ...props }) => {
     // 手电筒
     if (openLight) {
       setMousePosition({ x: mouse.x, y: mouse.y });
-      spotlightRef.current.position.x = -mouse.x * 12;
-      spotlightRef.current.position.y = -mouse.y * 8;
+      spotlightRef.current.position.x = -mouse.x * 10
+      spotlightRef.current.position.y = -mouse.y * 5
     }
 
     /*********  LOOK AT *********/
-    group.current.rotation.y = mouse.x;
-    group.current.rotation.x = -mouse.y;
+    group.current.rotation.y = mouse.x * Math.PI; // 将鼠标 X 坐标转换为旋转角度
+    group.current.rotation.x = -mouse.y * Math.PI; // 将鼠标 Y 坐标转换为旋转角度
   });
   return (
     <>
       {openLight ? (
         <spotLight
           ref={spotlightRef}
-          position={[0, 0, 10]}
-          angle={Math.PI / 70}
+          position={[0, 0, 6]}
+          angle={Math.PI / 40}
           penumbra={0.5}
           intensity={1}
           distance={40}
@@ -67,14 +67,14 @@ export const Gastly = ({ ...props }) => {
         penumbra={0.5}
         intensity={8}
         distance={10}
-        // color={0x8d00c7}
+      // color={0x8d00c7}
       />
 
       <group ref={group} {...props} dispose={null}>
         {/* 头 */}
         <mesh
           geometry={nodes.Head.geometry}
-          // material={nodes.Head.material}
+        // material={nodes.Head.material}
         >
           <meshStandardMaterial map={texture} roughness={0.5} />
         </mesh>

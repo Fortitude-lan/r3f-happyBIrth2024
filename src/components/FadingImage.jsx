@@ -1,6 +1,6 @@
 import * as THREE from "three";
-import { useRef, useState } from "react";
-import { Canvas, extend, useFrame } from "@react-three/fiber";
+import { useEffect, useRef, useState } from "react";
+import { Canvas, extend, useFrame, useThree } from "@react-three/fiber";
 import { useTexture, shaderMaterial, RoundedBox } from "@react-three/drei";
 
 export const ImageFadeMaterial = shaderMaterial(
@@ -41,6 +41,7 @@ extend({ ImageFadeMaterial });
 
 export const FadingImage = ({ ...props }) => {
   const ref = useRef();
+  const meshRef = useRef();
   const [texture1, texture2, dispTexture] = useTexture([
     "/textures/transparent.png",
     "/textures/world.png",
@@ -54,8 +55,17 @@ export const FadingImage = ({ ...props }) => {
       0.075
     );
   });
+  const { viewport } = useThree(); // 获取视口信息
+  useEffect(() => {
+    const { width, height } = viewport;
+    // 设定模型在视口边缘的位置，这里以左下角为例
+    if (meshRef.current) {
+      meshRef.current.position.set(- width / 2 +1.5, -height / 2 +1, 0);
+    }
+  }, [viewport]);
   return (
     <mesh
+      ref={meshRef}
       {...props}
       onPointerOver={(e) => {
         const canvasElement = document.querySelector("canvas"); // 替换成你的 Canvas 元素的 id

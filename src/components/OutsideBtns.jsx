@@ -27,7 +27,7 @@ const LoadingButton = ({ onClick, isOpen }) => (
   //   </div>
   //   <div className="shadow"></div>
   // </div>
-  <div className="loading ">
+  <div className="loading">
     <div className="mask"></div>
     <button
       className={`play-btn ${!isOpen ? "clicked" : ""}`}

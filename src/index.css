@@ -27,6 +27,7 @@ canvas.night {
 .loading {
   z-index: 1000000;
   position: absolute;
+  top: 0;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);

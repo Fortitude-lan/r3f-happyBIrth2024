@@ -155,9 +155,10 @@ export const WorldScene = () => {
             </EcctrlAnimation>
           </Ecctrl>
         </KeyboardControls>
+
         <Forests mode={pointMode} />
-        <Roles />
-        <RigidObjects />
+        {/* <Roles /> */}
+        {/* <RigidObjects /> */}
         {/* <Grass position={[45, 0, 45]} scale={0.4} /> */}
         {/* <Grass position={[0, 0, 40]} scale={[1.45, 0.3, 0.6]} /> */}
         <Boundary />
